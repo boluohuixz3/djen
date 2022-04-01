@@ -37,7 +37,7 @@ urlpatterns = [
     path('1posttext/', mypost.post_text, name='post_text'),
     path('1posttext2/', mypost.post_text2, name='post_text2'),
     
-    
+#修改测试
 
     
 ]
