@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+    {% autoescape off %}
+    {{ zd_list.caidan }}
+    {% endautoescape %}
+    {% load static %}
+测试
+    
+        
+
+
+    
+        <a href=/myen/chuti_tk/?xueke={{ zd_list.xueke }} >下一题：</a><br>
+        
+题目：{{ zd_list.timu }}<p>
+你的答案：    {{ zd_list.user_da }}<p>
+标准答案：    {{ zd_list.biao_da }}<p>
+
+<a href=/myen/chuti_tkbj/?id={{ zd_list.tm_id }}&caozuo="b"&xueke={{ zd_list.xueke }} >标记：</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <a href=/myen/chuti_tkbj/?id={{ zd_list.tm_id }}&caozuo="q"&xueke={{ zd_list.xueke }}  >取消标记：</a><br>
+{{ zd_list }}<p>
+</body>
+
+</html>

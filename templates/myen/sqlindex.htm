@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+
+ok
+<table border="1" width="100%" id="table1">
+	<tr>
+		<td align="center">数据库</td>
+		<td align="center">建表</td>
+		<td align="center">管理</td>
+		<td align="center">查看</td>
+		<td align="center">删除</td>
+		<td align="center">添加</td>
+		<td align="center">上传</td>
+	</tr>
+</table>
+当前数据库{{ zd_list.ku }}
+
+<table border="1" width="100%" id="table1">
+	<tr>
+		<td align="center"> 序号</td>
+		<td align="center">表名</td>
+		<td align="center">全部查看</td>
+		<td align="center">分页查看</td>
+		<td align="center">修改</td>
+		<td align="center">全部查看</td>
+		<td align="center">添加数据</td>
+		<td align="center">导入数据</td>
+		<td align="center">删除</td>
+	</tr>
+	{% for i in zd_list.shuju %}
+	<tr>
+		<td align="center"> {{ forloop.counter }}</td>
+		<td align="center">{{ i }}</td>
+		<td align="center"><a href=/myen/sqllistall/?question_id={{  i  }}&page_id=1>全部查看</a></td>
+		<td align="center"><a href=/myen/sqllist/?question_id={{  i  }}&page_id=1>分页查看</a></td>
+		<td align="center"><a href=/myen/xiugai/{{ i }}>修改</a></td>
+		<td align="center"><a href=/myen/ziduanadd/{{ i }}>新增字段</a></td>
+		<td align="center"><a href=/myen/sqlshujuadd/{{ i }}>添加数据</a></td>
+		<td align="center">导入数据</td>
+		<td align="center"><a href=/myen/sqlshanbiao/{{ i }}> 删除</a></td>
+		
+	</tr>
+
+	{% endfor %}
+</table>
+
+</body>
+
+</html>

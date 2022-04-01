@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+    {% autoescape off %}
+    {{ zd_list.caidan }}
+    {% endautoescape %}
+
+添加学科
+    <form method="POST" action="/myen/zj_xueke/">  <!-- 结尾必须事sqlcreate1/  -->
+        {% csrf_token %}
+
+        <table border="1" width="100%" id="table1">
+            <tr>
+                <td>学科名</td>
+                <td><input type="text" name="T1" size="20"></td>
+            </tr>
+                        
+                               
+            
+            
+        </table>
+        
+            <p><input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2"></p>
+       
+        
+
+
+        <table border="1" width="100%">
+            <tr>
+                <td> 序号</td>
+                {% for tou in zd_list.tou %}
+                <td>
+                {{ tou.0 }}</td>
+                {% endfor  %}
+            
+            
+            </tr>
+            
+            {% for i in zd_list.shuju %}
+            <tr>
+                <td> {{ forloop.counter }}</td>
+            
+            <td>{{i.0 }}</td><td>{{i.1 }}</td><td><a href="/myen/zj_nianji/?xk={{ i.2 }}&dm={{ i.3 }}">{{ i.2 }}</a></td><td>{{ i.3 }}</td><td>{{ i.4 }}</td><td>{{ i.5 }}</td>
+           
+            </tr>
+            {% endfor %}
+            </table>
+        </form>
+批量添加
+<form method="POST" action="/myen/zj_xuekeduo/">  <!-- 结尾必须事sqlcreate1/  -->
+    {% csrf_token %}
+    <table border="1" width="100%" id="table1">
+        <tr> <td>学科</td>
+            <td>
+                <textarea rows="24" name="S1" cols="81"></textarea></p>
+    <p align="center"><input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2"></p>
+ 
+            </td>
+            <td>操作说明：每行一个学科，以换行进入新行。建议在excel准备好数据粘贴。</td>
+        </tr> </table>
+ 
+    </form>
+</body>
+
+</html>

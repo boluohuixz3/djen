@@ -1,0 +1,11 @@
+循环输出<p>
+    <table border="1" width="100%">
+{% for i in zd_list %}
+<tr>
+{% for b in i %}
+<td>
+{{ b }}</td>
+{% endfor  %}
+</tr>
+{% endfor %}
+</table>

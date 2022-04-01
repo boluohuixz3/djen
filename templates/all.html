@@ -1,0 +1,20 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>index</title>
+</head>
+
+<body>
+网站目录<br>
+{% load static %}
+{% for i in zd_list %}
+ <li><a href={{ i.1 }}> {{ i.0 }}</a>
+  {% endfor %}
+   
+
+   
+
+</body>
+</html>

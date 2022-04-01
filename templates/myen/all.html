@@ -1,0 +1,35 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>新建网页 1</title>
+</head>
+
+<body>
+网站目录
+{% load static %}
+<table border="1" width="100%">
+    <tr><td>        序号</td>
+        <td>页面
+        <td>函数</td>
+        <td>说明</td>
+    </td>
+    {%     for a in zd_list   %}
+   
+
+    <tr>
+        <td>
+            {{ forloop.counter }}</td>
+        <td>{{ a.0 }}
+        <td><a href=/myen/{{ a.0 }}>{{ a.1 }}</a><td>2:{{ a.2 }}</td>
+    </td>
+</tr>
+
+        {% endfor %}
+   
+
+    
+    </table>
+
+</body>
+</html>

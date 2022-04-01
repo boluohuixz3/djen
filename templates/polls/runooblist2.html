@@ -1,0 +1,18 @@
+采用列表直接全部输出
+{{ zd_list }}
+<br>
+输出指定项目:第一组：
+{{ zd_list.0 }}<br>
+一个个：{{ zd_list.1.0 }},{{ zd_list.1.1 }},{{ zd_list.1.2 }}
+<br>
+循环输出<p>
+    <table border="1" width="100%">
+{% for i in zd_list %}
+<tr>
+{% for b in i %}
+<td>
+{{ b }}</td>
+{% endfor  %}
+</tr>
+{% endfor %}
+</table>

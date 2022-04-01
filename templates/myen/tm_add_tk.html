@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+    {% autoescape off %}
+    {{ zd_list.caidan }}
+    {% endautoescape %}
+    <form method="POST" action="/myen/tm_add_tk2/">  <!-- 结尾必须事sqlcreate1/  -->
+        {% csrf_token %}
+填空添加题目<br>
+<select size="1" name="D1">
+	<option>语文</option>
+	<option>历史</option>
+	<option>政治</option>
+	<option>英语</option>
+	</select><br>
+
+    
+
+        <p><textarea rows="33" name="S1" cols="110"></textarea></p>
+
+	<p align="center"><input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2"></p>
+
+       
+        
+        </form>
+题目内不能换行，答案另起一行，两题目之间只能一个空行<br>
+        填空1  xhzou_1___ceshi<br>
+        xz1<br>
+        
+        填空2  xhzou__2__ceshi<br>
+        xz2<br>
+        
+        填空3  xhzou_3___ceshi<br>
+        xz3<br>
+        
+        填空4  xhzou__4__ceshi<br>
+        xz4<br>
+        
+        填空5  xhzou_5___ceshi<br>
+        xz5<br>
+</body>
+
+</html>

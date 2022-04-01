@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+
+ok
+<table border="1" width="100%" id="table1">
+	<tr>
+		<td align="center">数据库</td>
+		<td align="center">建表</td>
+		<td align="center">管理</td>
+		<td align="center">查看</td>
+		<td align="center">删除</td>
+		<td align="center">添加</td>
+		<td align="center">上传</td>
+	</tr>
+</table>
+ <a href="/myen/sql1/">返回</a>  当前表名：{{ zd_list.biao }} 
+
+<table border="1" width="100%">
+<tr>
+<td> 修改</td>	
+<td> 删除</td>
+	{% for tou in zd_list.tou %}
+	<td>
+	{{ tou.0 }}</td>
+	{% endfor  %}
+
+
+</tr>
+
+{% for i in zd_list.shuju %}
+<tr>
+
+<td>
+ <a href="/myen/xiugai2/?bm_id={{  zd_list.biao  }}&sj_id={{ i.0 }}">修改</a>
+
+
+</td>
+	<td> <a href="/myen/sql_dell/?bm_id={{  zd_list.biao  }}&sj_id={{ i.0 }}">删除</a></td>
+{% for b in i %}
+<td>
+{{ b }}</td>
+{% endfor  %}
+</tr>
+{% endfor %}
+</table>
+
+</table>
+当前第{{ zd_list.ye }}页  <a href=/myen/sqllist/?question_id={{  zd_list.biao  }}&page_id={{  zd_list.ye1 }}>前一页</a>   <a href=/myen/sqllist/?question_id={{  zd_list.biao  }}&page_id={{  zd_list.ye2 }}>后一页</a>
+<a href="/myen/sql1/">返回</a>   <a href="/myen/sql_dellall/?bm_id={{  zd_list.biao  }}">删除全部</a>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+    {% autoescape off %}
+    {{ zd_list.caidan }}
+    {% endautoescape %}
+
+学科名：{{ zd_list.xk }}    代码：{{ zd_list.dm }}
+    <form method="POST" action="/myen/zj_zhang/?xk={{ zd_list.xk }} &dm={{ zd_list.dm }}">  <!-- 结尾必须事sqlcreate1/  -->
+        {% csrf_token %}
+
+        <table border="1" width="100%" id="table1">
+            <tr>
+                <td>章节</td>
+                <td>
+                    
+                    <textarea rows="24" name="S1" cols="81"></textarea></p>
+        <p align="center"><input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2"></p>
+    
+                
+                
+                
+                </td>
+            </tr>
+                        
+                               
+            
+            
+        </table>
+        
+            <p><input type="submit" value="提交" name="B3"><input type="reset" value="重置" name="B4"></p>
+       
+        
+
+
+        <table border="1" width="100%">
+            <tr>
+                <td> 序号</td>
+                {% for tou in zd_list.tou %}
+                <td>
+                {{ tou.0 }}</td>
+                {% endfor  %}
+            
+            
+            </tr>
+            
+            {% for i in zd_list.shuju %}
+            <tr>
+                <td> {{ forloop.counter }}</td>
+            
+            <td>{{i.0 }}</td><td>{{i.1 }}</td><td><a href="/myen/zj_zhang/?xk={{ i.2 }}&dm={{ i.3 }}">{{ i.2 }}</a></td><td>{{ i.3 }}</td><td>{{ i.4 }}</td><td>{{ i.5 }}</td>
+           
+            </tr>
+            {% endfor %}
+            </table>
+        </form>
+
+</body>
+
+</html>

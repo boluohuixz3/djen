@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+    <form action="/myen/cs_danci/?danci_id={{ zd_list.danci_id }}" method="post">
+        {% csrf_token %}
+    <table border="1" width="100%" id="table1">
+        <tr>
+            <td>汉语</td>
+            <td>{{ zd_list.hanyu }}　</td>
+        </tr>
+        <tr>
+            <td>词性　</td>
+            <td>{{ zd_list.cixing }}　</td>
+        </tr>
+        <tr>
+            <td>单词　</td>
+            <td>{{ zd_list.danci.0 }}　 <input type="text" name="T1"></td>
+        </tr>
+    </table>
+    
+    
+       
+
+  <p  align="center">      <input type="submit" value="提交"></p>
+    </form>
+
+   
+   
+    <table border="1" width="100%" id="table1">
+        <tr>
+            <td>单词</td>
+            <td>{{ zd_list.old1 }}　</td>
+        </tr>
+        <tr>
+            <td>汉语</td>
+            <td>{{ zd_list.old2 }}　</td>
+        </tr>
+        <tr>
+            <td  {{ zd_list.se }}>你的选择</td>
+            <td {{ zd_list.se }} >{{ zd_list.xuanze }}　</td>
+        </tr>
+    </table>
+    <a href=/myen/cs_fanyi >再来一题</a>
+</body>
+</html>

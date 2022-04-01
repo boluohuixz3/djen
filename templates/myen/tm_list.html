@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+    {% autoescape off %}
+    {{ zd_list.caidan }}
+    {% endautoescape %}
+
+    {% load static %}
+   
+
+        <table border="1" width="100%" id="table1">
+
+            {% for i in zd_list.shuju %}  
+            
+          
+            <tr>
+                <td>题目：</td>
+                <td>
+                    {% if i.3.0 in "/" %}
+                    <img src={% static i.3|safe %} >
+                     {% else %}
+                     {{ i.3  }}
+                     
+                    {% endif  %}
+                    </td>
+            </tr>
+            <tr>
+                <td>选项</td>
+                <td> {{ i.1|safe }} </td>
+            </tr>
+            <tr>
+                <td>答案</td>
+                <td> {{ i.4 }} </td>
+            </tr>
+
+            {%  endfor %}  
+        </table>    
+                        
+          
+              <br>     
+                 
+
+</body>
+
+</html>

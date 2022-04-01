@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+当前表明{{ zd_list.biao }}
+    <form method="POST" action="/myen/sqlml2/">  <!-- 结尾必须事sqlcreate1/  -->
+        {% csrf_token %}
+
+        <table border="1" width="100%" id="table1">
+            <tr>
+                <td>命令</td>
+                <td><input type="text" name="T1" size="120"></td>
+            </tr>
+                        
+           
+            
+            
+        </table>
+        
+            <p><input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2"></p>
+        </form>
+        
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+当前表明{{ zd_list.biao }}
+
+
+
+    <form method="POST" action="/myen/gl_xk_add/">  <!-- 结尾必须事sqlcreate1/  -->
+        {% csrf_token %}
+
+        <table border="1" width="100%" id="table1">
+            <tr>
+                <td>字段名</td>
+                <td><input type="text" name="T1" size="20"></td>
+            </tr>
+                        
+            <tr>
+                <td>字段类型</td>
+                <td><select size="1" name="D1">
+                    <option selected>INTEGER</option>
+                    <option>REAL</option>
+                    <option>TEXT</option>
+                    <option>NONE</option>
+                    </select></td>
+            </tr>
+                     
+            
+            
+        </table>
+        
+            <p><input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2"></p>
+        </form>
+        
+
+</body>
+
+</html>

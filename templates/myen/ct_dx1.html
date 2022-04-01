@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+    {% autoescape off %}
+    {{ zd_list.caidan }}
+    {% endautoescape %}
+    {% load static %}
+测试
+    <form method="POST" action="/myen/ct_dx2/?tm_id={{ zd_list.timu.0.0 }}&xueke={{ zd_list.xueke }}">  <!-- 结尾必须事sqlcreate1/  -->
+        {% csrf_token %}
+
+
+
+
+        <table border="1" width="100%" id="table1">
+            {% for i in zd_list.timu %}
+            <tr>
+
+
+                <td>
+                
+                
+                    {% if i.3.0 in "/" %}
+                    <img src={% static i.3|safe %} >
+                     {% else %}
+                     {{ i.3  }}
+                     
+                    {% endif  %}
+            
+            
+            
+            　</td>
+
+
+
+            </tr>
+            <tr>
+                <td>{{  i.1 |safe }}　</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+	<p align="center"><input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2"></p>
+
+       
+        
+        </form>
+        
+    
+        上一题：<br>
+        <table border="1" width="100%" id="table1">
+            {% for i in zd_list.oldtimu %}
+            <tr>
+
+
+                <td>
+                
+                
+                    {% if i.3.0 in "/" %}
+                    <img src={% static i.3|safe %} >
+                     {% else %}
+                     {{ i.3  }}
+                     
+                    {% endif  %}
+            
+            
+            
+            　</td>
+
+
+
+            </tr>
+            <tr>
+                <td>{{  i.1 |safe }}　</td>
+            </tr>
+            {% endfor %}
+        </table>
+<br>
+{{ zd_list.timu }}
+
+</body>
+
+</html>

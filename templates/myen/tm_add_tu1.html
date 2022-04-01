@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+    支持多文件上传<br>
+    <form action="/myen/tmaddtu2/" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+	<br>类别：<select size="1" name="D1">
+        <option>语文</option>
+        <option selected>历史</option>
+        <option>英语</option>
+        <option>政治</option>
+        </select>
+<br>
+答案：以英文“,”间隔，统一大写字母<br>
+<textarea rows="4" name="S1" cols="59"></textarea>
+
+            <p><input type="file" name="F1" size="20" multiple="multiple" /><input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2"></p>
+        </form>
+        
+
+
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<title>html5 </title>
+
+{{ time|date:"Y-m-d" }}
+<br>
+{{ time|date:"y-m-d" }}
+<br>
+{{ time|date:"H-i-s" }}
+<br>
+{{ time|date:"h-i-s" }}
+
+
+<br>
+
+文件显示图片方式：图片在polls\static\polls\images目录
+<br>
+{% load static %}
+<img src="{% static 'polls/images/2547.JPG' %}"><br>
+<audio src="{% static 'polls/england.mp3' %}" controls="controls" >England</audio>  <br>
+new
+
+</body>
+</html>

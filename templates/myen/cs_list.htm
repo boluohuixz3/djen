@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+
+ok
+<table border="1" width="100%" id="table1">
+	<tr>
+		<td align="center">数据库</td>
+		<td align="center">建表</td>
+		<td align="center">管理</td>
+		<td align="center">查看</td>
+		<td align="center">删除</td>
+		<td align="center">添加</td>
+		<td align="center">上传</td>
+	</tr>
+</table>
+当前表名：{{ zd_list.biao }}
+
+<table border="1" width="100%">
+<tr>
+	<td> 序号</td>
+	{% for tou in zd_list.tou %}
+	<td>
+	{{ tou.0 }}</td>
+	{% endfor  %}
+
+
+</tr>
+
+{% for i in zd_list.shuju %}
+<tr>
+	<td> {{ forloop.counter }}</td>
+{% for b in i %}
+<td>
+{{ b }}</td>
+{% endfor  %}
+</tr>
+{% endfor %}
+</table>
+
+</table>
+ 
+</body>
+
+</html>

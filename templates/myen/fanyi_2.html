@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<title>菜鸟教程(runoob.com)</title>
+<style type="text/css">
+    table{margin: 10px auto; width: 500px; border-collapse: collapse; }
+    table tr td {border:1px solid #e7e7e7; height: 25px;}
+   .title{text-align: center; font-weight: bolder;}
+    table tr:hover{background-color: #dafdf3;}
+
+    
+</style>
+<style type="text/css">
+.ttlink{
+    text-decoration:none;
+</style>
+
+</head>
+<body>
+    <table border="1" width="100%" style="font-size: 16pt" id="table1">
+        <tr>
+            <td  width="82">单词</td>
+            <td>{{ zd_list.danci }}　</td>
+        </tr>
+        <tr>
+            <td>词性　</td>
+            <td>{{ zd_list.cixing }}　</td>
+        </tr>
+    </table>
+    <font size="5">
+
+        {% csrf_token %}
+
+        <table cellpadding="0" cellspacing="0"> 
+
+      
+            {% for a in  zd_list.hanyu %}
+            <tr><td>
+         <a href=/myen/cs_fanyi_2/?danci_id={{ zd_list.danci_id }}&ok_id={{ a.0 }} class="ttlink">  {{ a.3 }} </a><br>
+        </td> </tr>            
+            {%  endfor %}
+        </table>      
+       
+
+
+
+       
+    
+<font>
+     
+    <table border="1" width="100%" style="font-size: 16pt"  id="table1">
+        <tr>
+            <td  width="82" >单词</td>
+            <td>{{ zd_list.old1 }}　</td>
+        </tr>
+        <tr>
+            <td>汉语</td>
+            <td>{{ zd_list.old2 }}　</td>
+        </tr>
+        <tr>
+            <td  {{ zd_list.se }}>你的选择</td>
+            <td {{ zd_list.se }} >{{ zd_list.xuanze }}　</td>
+        </tr>
+    </table>
+    <a href=/myen/cs_danci/  class="ttlink">再来一题</a>
+    单词总数:{{ zd_list.alldanci }},掌握：{{ zd_list.alldanci_ok  }}
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+    {% autoescape off %}
+    {{ zd_list.caidan }}
+    {% endautoescape %}
+
+单选添加题目，可以添加多题目，空行间隔，最后一行为答案，无标记。
+    <form method="POST" action="/myen/tm_add2/">  <!-- 结尾必须事sqlcreate1/  -->
+        {% csrf_token %}
+        <br>类别：<select size="1" name="D1">
+            <option>语文</option>
+            <option selected>历史</option>
+            <option>英语</option>
+            <option>政治</option>
+            </select>
+        <p><textarea rows="33" name="S1" cols="110"></textarea></p>
+
+	<p align="center"><input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2"></p>
+
+       
+        
+        </form>
+
+
+</body>
+
+</html>

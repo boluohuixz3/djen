@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+
+ok
+<table border="1" width="100%" id="table1">
+	<tr>
+		<td align="center">数据库</td>
+		<td align="center">建表</td>
+		<td align="center">管理</td>
+		<td align="center">查看</td>
+		<td align="center">删除</td>
+		<td align="center">添加</td>
+		<td align="center">上传</td>
+	</tr>
+</table>
+ <a href="/myen/sql1/">返回</a>  当前表名：{{ zd_list.biao }} 
+ <form method="POST" action="/myen/xiugai3/?bm_id={{zd_list.biao }}&sj_id={{ zd_list.sj_id }}">	
+	{% csrf_token %}
+<table border="1" width="100%">
+<tr>
+	
+	{% for tou in zd_list.tou %}
+	<td>
+	{{ tou.0 }}</td>
+	{% endfor  %}
+
+
+</tr>
+
+{% for i in zd_list.shuju %}
+<tr>
+	
+{% for b in i %}
+<td>
+{{ b }}</td>
+{% endfor  %}
+</tr>
+
+
+<tr>
+   
+{% for b in i %}
+<td><input type="text" name="TT" size="20" value="{{ b }}">
+</td>
+{% endfor  %}
+</tr>
+
+{% endfor %}
+</table>
+
+</table>
+<input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2"></p>
+
+<a href="/myen/xiugai/{{  zd_list.biao  }}">返回</a>  
+</body>
+
+</html>

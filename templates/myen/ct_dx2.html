@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>001</title>
+</head>
+
+<body>
+    {% autoescape off %}
+    {{ zd_list.caidan }}
+    {% endautoescape %}
+    {% load static %}
+测试
+    
+        {% csrf_token %}
+
+
+
+
+        <table border="1" width="100%" id="table1">
+            {% for i in zd_list.timu %}
+            <tr>
+
+
+                <td>
+                
+                
+                    {% if i.3.0 in "/" %}
+                    <img src={% static i.3|safe %} >
+                     {% else %}
+                     {{ i.3  }}
+                     
+                    {% endif  %}
+            
+            
+            
+            　</td>
+
+
+
+            </tr>
+            <tr>
+                <td>{{  i.1 |safe }}　</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+        
+   
+        
+    
+       
+        <table border="1" width="100%" id="table1">
+            {% for i in zd_list.oldtimu %}
+            <tr>
+
+
+                <td>
+                
+                
+                    {% if i.3.0 in "/" %}
+                    <img src={% static i.3|safe %} >
+                     {% else %}
+                     {{ i.3  }}
+                     
+                    {% endif  %}
+            
+            
+            
+            　</td>
+
+
+
+            </tr>
+            <tr>
+                <td>{{  i.1 |safe }}　</td>
+            </tr>
+            {% endfor %}
+        </table>
+<br>
+
+  你的选择:{{ zd_list.xuanze }}        正确答案:{{ zd_list.timu.0.4 }}<br></font>
+
+
+<a href="/myen/ct_dx1/?xueke={{ zd_list.xueke }}">下一题</a>
+</body>
+
+</html>
