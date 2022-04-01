@@ -101,3 +101,5 @@ def login_2(request):
         if form_obg.is_valid():  #---------------->通过表单中定义的规则对表单的所有数据进行检查，如果检查通过，说明验证通过
             return HttpResponse("登陆成功");
     return render(request,"login2.html",{'form_obj':form_obg});#---------->最终都要返回表单字段
+
+#测试修改
