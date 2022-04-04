@@ -12,7 +12,8 @@ def index(request):
     zd=[
         ['汉语翻译',"/myen/cs_danci/"],
         ['单词翻译',"/myen/cs_fanyi_2/?ok_id=0&danci_id=0"],
-        ['填空语文',"/myen/chuti_tk/?xueke=语文"]
+        ['填空语文',"/myen/chuti_tk/?xueke=语文"],
+        ['填空历史',"/myen/chuti_tk/?xueke=历史"]
     ]
     
 

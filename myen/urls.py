@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf.urls import url
 from . import mysql
-from . import mycs
+from . import mycs,myls
 from . import views
 app_name = 'myen'
 urlpatterns = [
@@ -46,7 +46,11 @@ urlpatterns = [
     url(r'^xiugai3/$', mysql.sql_xiugai2),
     url(r'^chuti_tk/$', mycs.chuti_tk),
     url(r'^chuti_tk1/$', mycs.chuti_tk1, name='tiankong'),
-    url(r'^chuti_tkbj/$', mycs.chuti_tkbj, name='tiankongbj')
+    url(r'^chuti_tkbj/$', mycs.chuti_tkbj, name='tiankongbj'),
+    path('lsadd/', myls.add_dan1, name='ls_add_dan1'),
+    path('lsadd2/', myls.add_dan2, name='ls_add_dan2'),
+    path('test/', myls.timu1, name='ls_timu1'),
+    path('test2/', myls.timu2, name='ls_timu2')
     
 
 

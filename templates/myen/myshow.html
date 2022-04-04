@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>运行结果显示</title>
+</head>
+
+<body>
+
+
+{{ zd_list|safe }}
+<p>
+    {% for i in zd_list %}
+<br>
+{% for m in i %}
+<br>
+{{ m }}
+{% endfor %}
+ {% endfor %}
+
+</body>
+
+</html>

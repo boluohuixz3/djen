@@ -1,4 +1,1 @@
-py manage.py runserver 192.168.2.207:9100
-ceshi
-≤‚ ‘°¢9000-91003
-33
+py manage.py runserver 192.168.1.5:9100
