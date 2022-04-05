@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<meta charset="UTF-8">
+<title>运行结果显示</title>
+</head>
+
+<body>
+test 
+    <form method="POST" action="/myen/test2/">  <!-- 结尾必须事sqlcreate1/  -->
+        {% csrf_token %}
+<p>
+    
+<br>
+<br><br>
+{{ zd_list.0.1 }}<br>
+
+<input type="radio" value="正确" name="R1">{{ zd_list.0.2 }}<br>
+<input type="radio" value="错误"  name="R1">{{ zd_list.0.3 }}<br>
+<input type="radio" value="错误"  name="R1">{{zd_list.0.4}}<br>
+
+<input type="radio" value="错误"  name="R1">{{ zd_list.0.5 }}<br>
+
+{{ zd_list.0.6 }}
+
+ <input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2">
+</form>
+</body>
+
+</html>

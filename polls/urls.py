@@ -36,6 +36,7 @@ urlpatterns = [
     path('postwen2/', mypost.post_wen2, name="postwen2"),
     path('1posttext/', mypost.post_text, name='post_text'),
     path('1posttext2/', mypost.post_text2, name='post_text2'),
+    path('djcs/', mypost.djcs, name='djcs'),
     
 #修改测试
 

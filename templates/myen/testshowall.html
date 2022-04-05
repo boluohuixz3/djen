@@ -9,26 +9,25 @@
 <body>
 测试：
 
-{{ zd_list.1 }}<br>
-    <form method="POST" action="/myen/test2/?user_id={{ zd_list.7 }}&timu_id={{ zd_list.0 }}&jl_id={{ zd_list.8 }}">  <!-- 结尾必须事sqlcreate1/  -->
+
+    <form method="POST" action="/myen/jieguo/">  <!-- 结尾必须事sqlcreate1/  -->
         {% csrf_token %}
 
-<ol type="A">
-{% for i in zd_list %}
-{% if forloop.counter > 2  %}
-{% if forloop.revcounter > 3 %}
-<li><input type="radio" value={{ forloop.counter  }} name="R1">{{ i }}</li><br>
-{% endif %}
-{% endif %}
+{%   for m in zd_list.timu %}
+{{ forloop.counter }}
+{% for n in m %}
+{{ n|safe }}
 {% endfor %}
-</ol>
+<br>
+
+{% endfor %}
 
 
 
  <input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2">
 </form>
 
-{{ zd_list }}
+
 </body>
 
 </html>

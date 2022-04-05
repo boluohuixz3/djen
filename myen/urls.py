@@ -49,8 +49,12 @@ urlpatterns = [
     url(r'^chuti_tkbj/$', mycs.chuti_tkbj, name='tiankongbj'),
     path('lsadd/', myls.add_dan1, name='ls_add_dan1'),
     path('lsadd2/', myls.add_dan2, name='ls_add_dan2'),
-    path('test/', myls.timu1, name='ls_timu1'),
-    path('test2/', myls.timu2, name='ls_timu2')
+    path('test1/', myls.timu1, name='ls_timu1'),
+    path('test2/', myls.timu2, name='ls_timu2'),
+    path('index/', myls.userload, name='userload'),
+    path('index2/', myls.userload2, name='userload'),
+    path('test30/', myls.timushowall, name='showall'),
+    path('jieguo/', myls.timujieguo, name='jieguo'),
     
 
 

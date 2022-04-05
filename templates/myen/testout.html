@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>运行结果显示</title>
+</head>
+
+<body>
+
+
+答题结果：
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>{{ zd_list.timu.1 }}<p>
+
+        </td>
+	</tr>
+	<tr>
+		<td>
+      <ol type="A">    
+
+{% for i in zd_list.timu %}
+{% if forloop.counter > 2  %}
+{% if forloop.revcounter > 1 %}
+<li>  {{ i }}</li>
+{% endif %}
+{% endif %}
+{% endfor %}
+</ol>
+        </td>
+	</tr>
+	<tr><p>
+		<td>你的答案：{{ zd_list.xuanze }}<br>标准答案： {{ zd_list.timu.6 }}</td>
+	</tr>
+	<tr>
+		<td>
+		<p align="center">&nbsp;<a href=/myen/test1/?user_id={{ zd_list.user_id }}&timu_id={{ zd_list.timu_id }}&jl_id={{ zd_list.jilu_id }}>重做</a>&nbsp;&nbsp;&nbsp; 
+		{{zd_list.jiesu  }}
+		
+{% if zd_list.jiesu > 0 %}
+<a href=/myen/chengji/?user_id={{ zd_list.user_id }>查看成绩</a></td>
+
+{% else  %}
+
+	<a href=/myen/test1/?user_id={{ zd_list.user_id }}&timu_id=0&jl_id=0>下一题</a></td>
+{% endif %}
+	</tr>
+</table>
+
+
+
+</body>
+
+</html>

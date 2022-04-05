@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+<meta charset="UTF-8">
+<title>运行结果显示</title>
+</head>
+
+<body>
+
+    <form method="POST" action="/myen/index2/">  <!-- 结尾必须事sqlcreate1/  -->
+        {% csrf_token %}
+<p>
+    
+    <p align="center">班级：<select size="1" name="D1">
+        <option>20机电3+3</option>
+        <option>20楼宇3+3</option>
+        <option>20制冷3+3</option>
+        <option>20机电淮海</option>
+        </select></p>
+        <p align="center">姓名：<input type="text" name="T1" size="12"></p>
+        <p align="center"><input type="submit" value="提交" name="B1"><input type="reset" value="重置" name="B2"></p>
+    
+</form>
+{{ zd_list }}
+</body>
+
+</html>

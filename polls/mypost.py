@@ -78,3 +78,7 @@ def post_text2(request):
     ctx['shuju'] = jieguo
     ctx['mulu']="ml"
     return render(request, "polls/post_text2.html", {"shuchu":ctx})
+
+def djcs(request):
+    zd=[1,2,3,4,5,8,4,"a","c","d"]
+    return render(request, 'polls/myshow.html',{"zd_list":zd})
