@@ -7,11 +7,11 @@
 </head>
 
 <body>
-《中国历史》知识测试：
+测试：
 
 
-    <form method="POST" action="/myen/jieguo/?u_id={{ zd_list.u_id }}">  <!-- 结尾必须事sqlcreate1/  -->
-        {% csrf_token %}
+    
+
 
 {%   for m in zd_list.timu %}
 {{ forloop.counter }}
@@ -24,8 +24,7 @@
 
 
 
- <input type="submit" value="提交" name="B1" style="font-size: 14pt"><input type="reset" value="重置" name="B2" style="font-size: 14pt">
-</form>
+
 
 
 </body>

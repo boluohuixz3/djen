@@ -239,7 +239,7 @@ def userload(request):
     return render(request,"myen/index.html",{"zd_list":"请选择班级和姓名"})
     
 def userload2(request):
-    jieguo=[]
+    jieguo={}
     tm_ls=[]
     if request.POST:
         banji=request.POST["D1"]
@@ -255,13 +255,16 @@ def userload2(request):
             load_id=user_id[0][0]
             mysql="update denglu set shijian='{0}',jiesu='0' where myid={1} ".format(t0,load_id)
             # chu=mysql
-            chu=sql_xie(mysql)
-            chu=shaixun(load_id,30)
-            tm_ls=chuti1(load_id,0)
-            jieguo=timu_show(tm_ls[1])
-            jieguo.append(load_id)
-            jieguo.append(tm_ls[0])
-            chu=jieguo
+            a=sql_xie(mysql)
+            a=shaixun(load_id,20)
+            jieguo["timu"]=timuall(load_id)
+            jieguo["u_id"]=load_id
+            # tm_ls=chuti1(load_id,0)
+            
+            # jieguo=timu_show(tm_ls[1])
+            # jieguo.append(load_id)
+            # jieguo.append(tm_ls[0])
+            # chu=jieguo
             
             
         else:
@@ -272,16 +275,17 @@ def userload2(request):
             mysql="select * from denglu where banji='{0}' and xingming='{1}' order by myid desc".format(banji,xingming)
             user_id=sql_du(mysql)["shuju"]
             chu1=user_id[0][0]
-            chu=shaixun(chu1,30)
-            tm_ls=chuti1(load_id,0)
-            jieguo=timu_show(tm_ls[1])
-            jieguo.append(load_id)
-            jieguo.append(tm_ls[0])
-            chu=jieguo
+            chu=shaixun(chu1,20)
+            # tm_ls=chuti1(load_id,0)
+            # jieguo=timu_show(tm_ls[1])
+            # jieguo.append(load_id)
+            # jieguo.append(tm_ls[0])
+            jieguo["timu"]=timuall(chu1)
+            jieguo["u_id"]=(chu1)
             
         
 
-    return render(request,"myen/testshow.html",{"zd_list":chu})
+    return render(request,"myen/testshowall.html",{"zd_list":jieguo})
 
 def shaixun(user_id,shu):
     mysql="delete  from jilu  where user_id={0}".format(user_id)
@@ -362,13 +366,18 @@ def timu_dan(myid,timu_id):
     return jieguo
 
 def timujieguo(request):
-    jieguo=[]
+    jieguo={}
     daan=[]
-    mysql="select * from jilu where user_id={0}".format(18)
+    u_id=request.GET.get("u_id")
+    jieguo["u_id"]=u_id
+    mysql="select * from denglu where myid={0}".format(u_id)
     hui=sql_du(mysql)["shuju"]
-    jian="R2"
+    
     banji=request.POST
-    print((banji))
+    print(hui)
+    jieguo["bj"]=hui[0][1]
+    jieguo["xm"]=hui[0][2]
+    jieguo["shi"]=int(time.time())-int(eval(hui[0][3]))
 
     
     # chu=banji["R1"]
@@ -381,13 +390,64 @@ def timujieguo(request):
         if len(n)==1:
             mysql="update jilu set daan='{0}' , defen={1} where myid={2}".format(n,0,m)
         # print(m,n)
-        print(mysql)
+        
         a=sql_xie(mysql)
-    chu="总计得分：{0}".format(defen)
+    jieguo["fen"]=defen
     
     
     
-    return render(request,"myen/myshow.html",{"zd_list":chu})
+    
+    return render(request,"myen/testshowall3.html",{"zd_list":jieguo})
+
+def jieguolist(request):
+    chu={}
+    u_id=request.GET.get("u_id")
+    chu["timu"]=timuchakan(u_id)
+    
+    return render(request,"myen/testshowall2.html",{"zd_list":chu})
+
+def timuchakan(user_id):
+    jieguo=[]
+    daan=[]
+    mysql="select * from jilu where user_id={0}".format(user_id)
+    hui=sql_du(mysql)["shuju"]
+    print(mysql)
+    for i in hui:
+        # print(i[2],i[3])
+        a=timu_dan2(i[3],i[2])
+        jieguo.append(a)
+        
+    
+    
+    
+    # jieguo=hui
+    return jieguo
+
+
+def timu_dan2(my_da,timu_id):
+    #返回list
+    jieguo=[]
+    mysql="select * from lishi where myid={0}".format(timu_id)
+    tm=sql_du(mysql)["shuju"][0]
+    tm_ls=tm[2].split("^")
+    # print(tm[2])
+    # jieguo.append(tm_ls)
+    jieguo.append(tm_ls[0]+"<ol type=A>")
+    a=""
+    for i in range(1,len(tm_ls)-1):
+        a=a+"<li>{0}</li>".format(tm_ls[i])
+             
+    a=a+"正确答案：{0}".format(tm_ls[-1])
+    if my_da=="^":
+        my_da="无"
+    a=a+"<br>你的答案：{0}".format(my_da)
+    
+    a=a+"</ol>"
+    jieguo.append(a)
+    
+    return jieguo
+    
+
 
     
     
