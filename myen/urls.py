@@ -56,6 +56,7 @@ urlpatterns = [
     path('test30/', myls.timushowall, name='showall'),
     path('jieguo/', myls.timujieguo, name='jieguo'),
     path('test30out/', myls.jieguolist, name='jieguolist'),
+    path('tongji/', myls.tongji, name='tongji'),
     
     
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>运行结果显示</title>
+</head>
+
+<body>
+
+
+
+<table border="0" width="100%">
+	<tr>
+		<td>序号</td>
+		<td>班级</td>
+		<td>姓名</td>
+		<td>得分</td>
+		<td>用时</td>
+        <td>日期</td>
+
+	</tr>
+{% for i in zd_list %}
+
+	<tr>
+		<td>{{ forloop.counter }}</td>
+		<td>{{ i.0 }}</td>
+		<td>{{ i.1 }}</td>
+		<td>{{ i.2 }}</td>
+		<td>{{ i.3 }}秒</td>
+        <td>{{ i.4 }}</td>
+	</tr>
+	
+
+
+{% endfor %}
+</table>
+
+
+
+
+</body>
+
+</html>

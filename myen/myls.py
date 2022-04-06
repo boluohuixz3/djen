@@ -43,7 +43,7 @@ def list_all(biaoming):
     zd1=sj.fetchall()
     des = sj.description
     for i in des:
-        print(i)
+        # print(i)
         tou.append(i[0])
     zd["tou"]=tou
     zd["shuju"]=zd1
@@ -75,6 +75,7 @@ def sql_xie(mysql):
     zd=""
     ml=getml("en.sqlite3")
     conn=sqlite3.connect(ml) #创建指定数据库 硬盘
+    # print(mysql)
     sj = conn.cursor()
     sj.execute(mysql)
     conn.commit()
@@ -141,7 +142,7 @@ def add_dan2(request):
             
             
             mysql="insert into lishi(leixing,timu,xueke) values('单选','{0}','{1}')".format(tm_str,xueke)
-            print(mysql)
+            # print(mysql)
             jg=jg+sql_xie(mysql)+"<br>"
             # jg=jg+mysql+"<br>"
     return render(request,"myen/myshow.html",{"zd_list":jg})
@@ -190,10 +191,10 @@ def timu_show(timu_id):
     jieguo=[]
     i=[]
     mysql="select * from lishi where myid={0}".format(timu_id)
-    print(mysql)
+    # print(mysql)
     zd=sql_du(mysql)["shuju"]
     if len(zd)>0:
-        print(zd)
+        # print(zd)
         i = zd[0]
         jieguo=i[2].split("^")
         jieguo.insert(0,i[0])
@@ -216,7 +217,7 @@ def timu2(request):
         jieguo["xuanze"]=xuanze
         jieguo["timu_id"]=zz1
         jieguo['jilu_id']=zz3
-        print(tm_ls[6])
+        # print(tm_ls[6])
         if tm_ls[6]==xueke:
             defen=1
         else:
@@ -306,26 +307,26 @@ def shaixun(user_id,shu):
     
     return jieguo
 
-def chuti1(user_id,tm_id):
-    jieguo=[]
-    if tm_id==0:
-        mysql="select myid,timu from jilu where user_id='{0}' and daan= '^'".format(user_id)
-        print(mysql)
-        timu=sql_du(mysql)["shuju"]
-        # print("timu:",timu[0])
+# def chuti1(user_id,tm_id):
+#     jieguo=[]
+#     if tm_id==0:
+#         mysql="select myid,timu from jilu where user_id='{0}' and daan= '^'".format(user_id)
+#         # print(mysql)
+#         timu=sql_du(mysql)["shuju"]
+#         # print("timu:",timu[0])
         
-        # timu=timu
-        # print(timu[0])
+#         # timu=timu
+#         # print(timu[0])
         
-    else:
-        # mysql="select myid,timu from jilu where user_id='{0}' and daan= '^'".format(user_id)
-        # timu=sql_du(mysql)["shuju"]
-        print("timu:",timu[0])
+#     else:
+#         # mysql="select myid,timu from jilu where user_id='{0}' and daan= '^'".format(user_id)
+#         # timu=sql_du(mysql)["shuju"]
+#         # print("timu:",timu[0])
         
-        # timu=timu
-        # print(timu[0])
-    jieguo=timu[0]
-    return jieguo
+#         # timu=timu
+#         # print(timu[0])
+#     jieguo=timu[0]
+#     return jieguo
 
 def timushowall(request):
     chu={}
@@ -340,7 +341,7 @@ def timuall(user_id):
     for i in timu30:
         jieguo.append(timu_dan(i[0],i[2]))
     # jieguo.append(timu30)
-    print(jieguo)
+    # print(jieguo)
     return jieguo
 
 def timu_dan(myid,timu_id):
@@ -374,12 +375,15 @@ def timujieguo(request):
     hui=sql_du(mysql)["shuju"]
     
     banji=request.POST
-    print(hui)
+    # print(hui)
     jieguo["bj"]=hui[0][1]
     jieguo["xm"]=hui[0][2]
     jieguo["shi"]=int(time.time())-int(eval(hui[0][3]))
-
+    mysql="update  denglu  set jiesu='{1}'  where myid={0}".format(u_id,time.time())
+    # print(mysql)
+    jg=sql_xie(mysql)
     
+    print(banji)
     # chu=banji["R1"]
     defen=0
     for m,n in banji.items() :
@@ -387,11 +391,13 @@ def timujieguo(request):
         if len(n)==3 :
             defen=defen+1
             mysql="update jilu set daan='{0}' , defen={1} where myid={2}".format(n[0],1,m)
+            a=sql_xie(mysql)
+        
         if len(n)==1:
             mysql="update jilu set daan='{0}' , defen={1} where myid={2}".format(n,0,m)
         # print(m,n)
-        
-        a=sql_xie(mysql)
+            # print(mysql)
+            a=sql_xie(mysql)
     jieguo["fen"]=defen
     
     
@@ -411,7 +417,7 @@ def timuchakan(user_id):
     daan=[]
     mysql="select * from jilu where user_id={0}".format(user_id)
     hui=sql_du(mysql)["shuju"]
-    print(mysql)
+    # print(mysql)
     for i in hui:
         # print(i[2],i[3])
         a=timu_dan2(i[3],i[2])
@@ -446,6 +452,30 @@ def timu_dan2(my_da,timu_id):
     jieguo.append(a)
     
     return jieguo
+
+def tongji(request):
+    chu=[]
+    
+    mysql="select * from denglu order by banji,xingming"
+    jg=sql_du(mysql)["shuju"]
+    # chu["timu"]=jg
+    for i in jg:
+        a=[]
+        mysql="select sum(defen) from jilu where user_id={0}".format(i[0])
+        jg=sql_du(mysql)["shuju"]
+        a.append(i[1])
+        a.append(i[2])
+        
+        # a[3]=int(eval(i[4])-eval(i[3]))
+        a.append(jg[0][0])
+        a.append(int(eval(i[4])-eval(i[3])))
+        b=time.localtime(eval(i[3]))
+        a.append(time.strftime("%Y-%m-%d %H:%M:%S", b))
+        chu.append(a)
+        
+        # print(a)
+    
+    return render(request,"myen/tongji.html",{"zd_list":chu})
     
 
 
