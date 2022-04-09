@@ -257,7 +257,7 @@ def userload2(request):
             mysql="update denglu set shijian='{0}',jiesu='0' where myid={1} ".format(t0,load_id)
             # chu=mysql
             a=sql_xie(mysql)
-            a=shaixun(load_id,20)
+            a=shaixun(load_id,40)
             jieguo["timu"]=timuall(load_id)
             jieguo["u_id"]=load_id
             # tm_ls=chuti1(load_id,0)
@@ -276,7 +276,7 @@ def userload2(request):
             mysql="select * from denglu where banji='{0}' and xingming='{1}' order by myid desc".format(banji,xingming)
             user_id=sql_du(mysql)["shuju"]
             chu1=user_id[0][0]
-            chu=shaixun(chu1,20)
+            chu=shaixun(chu1,40)
             # tm_ls=chuti1(load_id,0)
             # jieguo=timu_show(tm_ls[1])
             # jieguo.append(load_id)
