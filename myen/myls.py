@@ -476,6 +476,8 @@ def tongji(request):
         # print(a)
     
     return render(request,"myen/tongji.html",{"zd_list":chu})
+
+#测试多条语句同时提交
     
 
 
