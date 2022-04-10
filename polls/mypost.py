@@ -9,17 +9,34 @@ def post_form(request):
 def post_data(request):
     ctx ={}
     if request.POST:
-        ctx['rlt'] = request.POST['q']
-        ctx['rlt1'] = request.POST['q2']
-        ctx['rlt2'] = request.POST['q3']
-        ctx['rlt3'] = request.POST['R1']
-        fx=[]
-        fx=request.POST.getlist("CC")
-        ctx['rlt4']=fx
+        a=request.POST.get
+        # ctx['rlt'] = request.POST['q']
+        # ctx['rlt1'] = request.POST['q2']
+        # ctx['rlt2'] = request.POST['q3']
+        # ctx['rlt3'] = request.POST['R1']
+        # fx=[]
+        # fx=request.POST.getlist("CC")
+        # ctx['rlt4']=fx
 
 
-        ctx['D1'] = request.POST['D1']
-    return render(request, "polls/postlist.html", ctx)
+        # ctx['D1'] = request.POST['D1']
+    ctx["jg"]=(a)
+    strpost=str(a)
+    zi=","
+    l=strpost.index(zi)
+    strpost="{"+strpost[l+1:-2]
+    print(strpost)
+    zdpost=eval(strpost)
+    # for n in a:
+    #     print(n)
+        
+    # ctx["cl"]=(strpost)    
+    # print(zdpost)
+    for n,m in zdpost.items():
+        cc_m="".join(m)
+        print(n,cc_m)
+        
+    return render(request, "polls/postlist.html", {"zd_list":ctx})
 
 def post_wen(request):
     return render(request, 'polls/post_wen.html')

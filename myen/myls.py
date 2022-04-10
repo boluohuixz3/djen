@@ -136,12 +136,18 @@ def add_dan2(request):
         timu=fenge(shuru)
         for i in timu:
             tm_ls=i
-            l=len(tm_ls)-1
-            tm_ls[l]=str(tm_ls[l]).upper()
+            if len(tm_ls[-1])==1:
+                leibie="单选"
+            else:
+                leibie="多选"
+            
+         
+            tm_ls[-1]=str(tm_ls[-1]).upper()
+            
             tm_str="^".join(tm_ls)
             
             
-            mysql="insert into lishi(leixing,timu,xueke) values('单选','{0}','{1}')".format(tm_str,xueke)
+            mysql="insert into lishi(leixing,timu,xueke) values('{2}','{0}','{1}')".format(tm_str,xueke,leibie)
             # print(mysql)
             jg=jg+sql_xie(mysql)+"<br>"
             # jg=jg+mysql+"<br>"
@@ -156,6 +162,8 @@ def fenge(mystr):
     mystr=mystr.replace('\"','“')
         
     mystr=mystr.replace('\r\n\r\n','^')
+    if mystr[-1]=="^" :
+        mystr=mystr[0:-1]
     gc=mystr.split('^')
     for i in gc:
         mystr1=i
@@ -249,15 +257,17 @@ def userload2(request):
             chu="姓名必须输入"
             return render(request,"myen/index.html",{"zd_list":chu})
         t0=time.time()
-        mysql="select * from denglu where banji='{0}' and xingming='{1}' order by myid desc".format(banji,xingming)
+        mysql="select * from denglu where banji='{0}' and xingming='{1}' and jiesu=0 order by myid desc".format(banji,xingming)
         user_id=sql_du(mysql)["shuju"]
+        # print("user_id",user_id)
                 
         if len(user_id)>0:
+            #没有交卷，完成原题目，更新时间
             load_id=user_id[0][0]
             mysql="update denglu set shijian='{0}',jiesu='0' where myid={1} ".format(t0,load_id)
             # chu=mysql
             a=sql_xie(mysql)
-            a=shaixun(load_id,40)
+            # a=shaixun(load_id,40)
             jieguo["timu"]=timuall(load_id)
             jieguo["u_id"]=load_id
             # tm_ls=chuti1(load_id,0)
@@ -269,6 +279,7 @@ def userload2(request):
             
             
         else:
+            #已经完成重新出题，或新用户
                 
             mysql="insert into denglu(banji,xingming,shijian,jiesu) values('{0}','{1}','{2}','{3}')".format(banji,xingming,t0,'0')
             # chu=mysql
@@ -291,17 +302,23 @@ def userload2(request):
 def shaixun(user_id,shu):
     mysql="delete  from jilu  where user_id={0}".format(user_id)
     tm_str=sql_xie(mysql)
-    tm_list=sql_du(mysql)["shuju"]
+    # tm_list=sql_du(mysql)["shuju"]
     mysql="select myid from lishi  ORDER BY  RANDOM()  limit {0}".format(shu)
     
     tm_list=sql_du(mysql)["shuju"]
+    # print(tm_list)
     n=1
+    sqladd=""
     for i in tm_list:
         
-        mysql="insert into jilu(user_id,timu,jielun) values('{0}','{1}','{2}')".format(user_id,i[0],n)
+        sqladd=sqladd+",('{0}','{1}','{2}')".format(user_id,i[0],n)
         # print(mysql)
         sql_xie(mysql)
         n=n+1
+    mysql="insert into jilu(user_id,timu,jielun) values"+sqladd[1:]
+    # print(mysql)   
+    jg=sql_xie(mysql) 
+        
     jieguo="ok"
     
     
@@ -349,16 +366,24 @@ def timu_dan(myid,timu_id):
     jieguo=[]
     mysql="select * from lishi where myid={0}".format(timu_id)
     tm=sql_du(mysql)["shuju"][0]
+    tm_lei=tm[1]
+    if tm_lei=="多选":
+        kongjian="checkbox"
+    else:
+        kongjian="radio"
+    print(tm_lei)
+    
     tm_ls=tm[2].split("^")
     # print(tm[2])
     # jieguo.append(tm_ls)
     jieguo.append(tm_ls[0]+"<ol type=A>")
     a=""
+    
     for i in range(1,len(tm_ls)-1):
-        if tm_ls[-1]==chr(i+64):
-            a=a+"<li><input type=radio value={0}ok name={1}>{2}</li>".format(chr(64+i),myid,tm_ls[i])
-        else:
-            a=a+"<li><input type=radio value={0} name={1}>{2}</li>".format(chr(64+i),myid,tm_ls[i])
+        # if chr(i+64) in tm_ls[-1] :
+        a=a+"<li><input type={3} value={0} name={1}{4}>{2}</li>".format(chr(64+i),str(1000000+myid)[1:],tm_ls[i],kongjian,tm_ls[-1])
+        # else:
+        #     a=a+"<li><input type={3} value={0} name={1}>{2}</li>".format(chr(64+i),str(1000000+myid)[1:],tm_ls[i],kongjian)
             
     
     a=a+"</ol>"
@@ -375,7 +400,14 @@ def timujieguo(request):
     hui=sql_du(mysql)["shuju"]
     
     banji=request.POST
-    # print(hui)
+    strpost=str(banji)
+    dou=","
+    l=strpost.index(dou)
+    l2=strpost.rindex(dou)
+    strpost="{"+strpost[l+1:l2]+"}"
+    zdpost=eval(strpost)
+    # print(zdpost)
+    
     jieguo["bj"]=hui[0][1]
     jieguo["xm"]=hui[0][2]
     jieguo["shi"]=int(time.time())-int(eval(hui[0][3]))
@@ -383,21 +415,29 @@ def timujieguo(request):
     # print(mysql)
     jg=sql_xie(mysql)
     
-    print(banji)
+    # print(banji)
     # chu=banji["R1"]
     defen=0
-    for m,n in banji.items() :
+    
+    for m,n in zdpost.items() :
+        hao=int(m[0:6])
+        da=m[6:]
+        jiao="".join(n)
         
-        if len(n)==3 :
+        # print(hao,da,jiao)
+        if da==jiao:
             defen=defen+1
-            mysql="update jilu set daan='{0}' , defen={1} where myid={2}".format(n[0],1,m)
-            a=sql_xie(mysql)
+            mysql="update jilu set daan='{0}' , defen={1} where myid={2}".format(jiao,1,hao)
+            # a=sql_xie(mysql)
+        else:
+            mysql="update jilu set daan='{0}' , defen={1} where myid={2}".format(jiao,0,hao)
+            
         
-        if len(n)==1:
-            mysql="update jilu set daan='{0}' , defen={1} where myid={2}".format(n,0,m)
-        # print(m,n)
-            # print(mysql)
-            a=sql_xie(mysql)
+    #     if len(n)==1:
+    #         mysql="update jilu set daan='{0}' , defen={1} where myid={2}".format(n,0,m)
+    #     # print(m,n)
+        print(mysql)
+        a=sql_xie(mysql)
     jieguo["fen"]=defen
     
     
